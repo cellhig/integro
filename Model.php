@@ -12,3 +12,28 @@ function Connection(){
         return false;
     }
 }
+
+function validateIfUserExist($connection, $user){
+    $statement = $connection->prepare('SELECT * FROM users WHERE nickname = :user');
+    $statement->execute([
+        ':user' => $user
+    ]);
+    
+    $result = $statement->fetch();
+    return $result;
+}
+
+function createUser($connection, $name, $nickname, $password){
+   
+    $statement = $connection->prepare('INSERT INTO users(id, name, nickname, password) VALUES(NULL, :well, :nickname, :pass)');
+    $resultado = $statement->execute(array(
+    ':well' => $name,
+    ':nickname' => $nickname,
+    ':pass' => $password
+    ));
+
+    if($resultado === TRUE) echo "Insertado correctamente";
+    else echo "Algo salió mal. Por favor verifica que la tabla exista";
+
+}
+
