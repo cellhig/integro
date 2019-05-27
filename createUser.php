@@ -13,7 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nickname = $_POST["nickname"];
     $pasword = md5($_POST["password"]);
 
-    createUser($connection, $name, $nickname, $pasword);
+    $newUser = createUser($connection, $name, $nickname, $pasword);
+
 
     header('location: index.php');
 }
+
+require 'views/createUser.php';

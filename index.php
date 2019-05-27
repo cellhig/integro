@@ -1,7 +1,8 @@
 <?php
+session_start();
 
-if (!isset($_SESSION['usuario'])) {
-	header('Location: login.php');
+if (!isset($_SESSION['nickname'])) {
+    header('Location: login.php');
 }
 
 require 'Model.php';
@@ -12,3 +13,5 @@ if (!$connection) {
     //echo 'no se pudo conectar';
     header('location: error.php');
 }
+
+require 'views/index.php';
